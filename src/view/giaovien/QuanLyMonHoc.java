@@ -42,7 +42,6 @@ public class QuanLyMonHoc extends javax.swing.JFrame {
 
         btn_themmoi = new javax.swing.JButton();
         btn_sua = new javax.swing.JButton();
-        btn_xoa = new javax.swing.JButton();
         btn_timkiem = new javax.swing.JButton();
         btn_xemdiem = new javax.swing.JButton();
         lb_thongbao = new javax.swing.JLabel();
@@ -73,14 +72,6 @@ public class QuanLyMonHoc extends javax.swing.JFrame {
             }
         });
 
-        btn_xoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_xoa.setText("Xóa");
-        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_xoaActionPerformed(evt);
-            }
-        });
-
         btn_timkiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_timkiem.setText("Tìm kiếm");
         btn_timkiem.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +82,11 @@ public class QuanLyMonHoc extends javax.swing.JFrame {
 
         btn_xemdiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_xemdiem.setText("Xem điểm");
+        btn_xemdiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xemdiemActionPerformed(evt);
+            }
+        });
 
         lb_thongbao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lb_thongbao.setForeground(new java.awt.Color(255, 0, 0));
@@ -156,27 +152,14 @@ public class QuanLyMonHoc extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(82, 82, 82)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_xemdiem, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_themmoi, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_themmoi, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_lammoi, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_xemdiem, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(btn_quanlycauhoi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_quanlydethi, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -190,7 +173,16 @@ public class QuanLyMonHoc extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addComponent(lb_thongbao, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)))))
+                                .addGap(8, 8, 8))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_quanlycauhoi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_lammoi, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_quanlydethi, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -208,11 +200,10 @@ public class QuanLyMonHoc extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_themmoi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_xemdiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_xemdiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_lammoi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -253,28 +244,6 @@ public class QuanLyMonHoc extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btn_timkiemActionPerformed
-
-    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
-        // TODO add your handling code here:
-        
-        String tenMH = txt_tenMH.getText();
-        if (tenMH.equals("")) {
-            lb_thongbao.setText("Bạn cần chọn một môn học để xóa");
-        } else {
-            int click = JOptionPane.showConfirmDialog(rootPane, "Bạn chắc chắn muốn xóa?");
-            if (click == JOptionPane.YES_OPTION) {
-                try {
-                    monhocCtr.xoa(SaveMonHoc.maMH);
-                    JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
-                    loadData();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(QuanLyMonHoc.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(QuanLyMonHoc.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
@@ -368,6 +337,23 @@ public class QuanLyMonHoc extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_quanlydethiActionPerformed
 
+    private void btn_xemdiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xemdiemActionPerformed
+        // TODO add your handling code here:
+        if (SaveMonHoc.maMH == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 môn học");
+        } else {
+            try {
+                DiemMonHoc diemMH = new DiemMonHoc();
+                diemMH.setVisible(true);
+                diemMH.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(QuanLyMonHoc.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(QuanLyMonHoc.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btn_xemdiemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -417,7 +403,6 @@ public class QuanLyMonHoc extends javax.swing.JFrame {
     private javax.swing.JButton btn_themmoi;
     private javax.swing.JButton btn_timkiem;
     private javax.swing.JButton btn_xemdiem;
-    private javax.swing.JButton btn_xoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;

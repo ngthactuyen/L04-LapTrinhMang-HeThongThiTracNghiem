@@ -81,6 +81,7 @@ public class CauHoiController {
     }
     
     public int sua(CauHoi ch) throws ClassNotFoundException, SQLException{
+        
         int i = 0;
         int dem = 0;
         conn = DBConnect.openConnection();
@@ -92,11 +93,11 @@ public class CauHoiController {
                 + "'and dapanD like N'"+ ch.getDapanD()
                 + "'and dapandung like N'"+ ch.getDapandung()
                 + "'";
-        rs = pstmt.executeQuery(sql);
+        rs = stmt.executeQuery(sql);
         while (rs.next()) {  
             dem++;
         }
-        if (dem == 1) {
+        if (dem == 0) {
             pstmt = conn.prepareStatement("update CauHoi set noidung= ?, dapanA= ?, dapanB= ?, dapanC= ?, dapanD= ?, dapandung= ? where maCH= ?");
             pstmt.setString(1, ch.getNoidung());
             pstmt.setString(2, ch.getDapanA());
@@ -115,22 +116,15 @@ public class CauHoiController {
         return i;
     }
     
-    public int xoa(String maSV) throws ClassNotFoundException, SQLException{
-        int i = 0;
+    public void xoa(int maCH) throws ClassNotFoundException, SQLException{
         conn = DBConnect.openConnection();
-        pstmt = conn.prepareStatement("Select* from SinhVien where maSV= ?");
-        pstmt.setString(1, maSV);
-        rs = pstmt.executeQuery();
-        while (rs.next()) {  
-            i = 1;
-        }
-        if (i == 1) {
-            pstmt = conn.prepareStatement("delete from SinhVien where maSV = ?");
-            pstmt.setString(1, maSV);
-            pstmt.executeUpdate();
-        }
+        stmt = conn.createStatement();
+        String sql = "delete from Chitietdethi where maCH ="+ maCH;
+        stmt.executeUpdate(sql);
+
+        sql = "delete from CauHoi where maCH="+ maCH;
+        stmt.executeUpdate(sql);
         DBConnect.closeConnection();
-        return i;
     }
     
     

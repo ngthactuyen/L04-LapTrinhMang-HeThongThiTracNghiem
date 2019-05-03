@@ -62,4 +62,27 @@ public class DeThiController {
         DBConnect.closeConnection();
         return i;
     }
+    
+    public void sua(String maDT, int thoigianlam) throws ClassNotFoundException, SQLException{
+        int i = 0;
+        int dem = 0;
+        conn = DBConnect.openConnection();
+        stmt = conn.createStatement();
+        String sql = "update DeThi set thoigianlammoicau= "+ thoigianlam+ "where maDT= '"+ maDT+"'";
+        stmt.executeUpdate(sql);
+        DBConnect.closeConnection();
+    }
+    
+    public void xoa(String maDT) throws ClassNotFoundException, SQLException{
+        conn = DBConnect.openConnection();
+        stmt = conn.createStatement();
+        String sql = "delete from Chitietdethi where maDT like'"+ maDT+"'";
+        stmt.executeUpdate(sql);
+
+        sql = "delete from DeThi where maDT like'"+ maDT+"'";
+        stmt.executeUpdate(sql);
+        DBConnect.closeConnection();
+        
+    }
+    
 }

@@ -251,47 +251,38 @@ public class QuanLyDeThi extends javax.swing.JFrame {
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
 
-        String tenMH = txt_tenMH.getText();
-        if (tenMH.equals("")) {
-            lb_thongbao.setText("Bạn cần chọn một môn học để sửa");
+        int thoigianlam = (int) sp_thoigianlam.getValue();
+        if (SaveDeThi.maDT.equals("")) {
+            lb_thongbao.setText("Bạn cần chọn 1 đề thi");
+        }else if (thoigianlam <= 0) {
+            lb_thongbao.setText("Thời gian làm bài phải lớn hơn 0");
         }else{
             try {
-                int i = monhocCtr.sua(tenMH);
-                if (i == 0) {
-                    lb_thongbao.setText("Đã có môn có tên như trên, hãy nhập lại");
-                }
-                if (i == 1) {
-                    JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
-                    loadData();
-                }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(QuanLyMonHoc.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(QuanLyMonHoc.class.getName()).log(Level.SEVERE, null, ex);
+                dethiCtr.sua(SaveDeThi.maDT, thoigianlam);
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
+                loadData();
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(QuanLyDeThi.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
-
-        String tenMH = txt_tenMH.getText();
-        if (tenMH.equals("")) {
-            lb_thongbao.setText("Bạn cần chọn một môn học để xóa");
-        } else {
-            int click = JOptionPane.showConfirmDialog(rootPane, "Bạn chắc chắn muốn xóa?");
-            if (click == JOptionPane.YES_OPTION) {
-                try {
-                    monhocCtr.xoa(SaveMonHoc.maMH);
-                    JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
-                    loadData();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(QuanLyMonHoc.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(QuanLyMonHoc.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        if (SaveDeThi.maDT.equals("")) {
+            lb_thongbao.setText("Bạn cần chọn đề thi");
+        }else{
+            try {
+                dethiCtr.xoa(SaveDeThi.maDT);
+                JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
+                loadData();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(QuanLyDeThi.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(QuanLyDeThi.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void tbl_dataMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_dataMouseReleased
@@ -387,6 +378,7 @@ public class QuanLyDeThi extends javax.swing.JFrame {
     private DefaultTableModel modelDeThi;
     
     public void loadData() throws ClassNotFoundException, SQLException{
+        lb_thongbao.setText("");
         SaveDeThi.maDT = "";
         SaveDeThi.thoigianlammoicau = 0;
         txt_made.setText("");

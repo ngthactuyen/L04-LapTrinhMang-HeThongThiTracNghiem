@@ -297,11 +297,12 @@ public class QuanLyCauHoi extends javax.swing.JFrame {
         String dapanD = txt_luachonD.getText();
         String dapandung = cb_dapandung.getSelectedItem().toString();
         CauHoi ch = new CauHoi(maCH, mh.getMaMH(), noidung, dapanA, dapanB, dapanC, dapanD, dapandung);
+//        System.out.println(ch);
         if (maCH == 0) {
             lb_thongbao.setText("Bạn cần chọn 1 câu hỏi để sửa");
         }else if (noidung.equals("") || dapanA.equals("") || dapanB.equals("") || dapanC.equals("") || dapanD.equals("") || dapandung.equals("")) {
             lb_thongbao.setText("Tất cả các trường không được để trống");
-        }else if (noidung.equals(cauhoi.getNoidung()) || dapanA.equals(cauhoi.getDapanA()) || dapanB.equals(cauhoi.getDapanB()) || dapanC.equals(cauhoi.getDapanC()) || dapanD.equals(cauhoi.getDapanD()) || dapandung.equals(cauhoi.getDapandung())) {
+        }else if (noidung.equals(cauhoi.getNoidung()) && dapanA.equals(cauhoi.getDapanA()) && dapanB.equals(cauhoi.getDapanB()) && dapanC.equals(cauhoi.getDapanC()) && dapanD.equals(cauhoi.getDapanD()) && dapandung.equals(cauhoi.getDapandung())) {
             try {
                 JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 loadData();
@@ -331,23 +332,21 @@ public class QuanLyCauHoi extends javax.swing.JFrame {
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
 
-        String tenMH = txt_tenMH.getText();
-        if (tenMH.equals("")) {
-            lb_thongbao.setText("Bạn cần chọn một môn học để xóa");
-        } else {
-            int click = JOptionPane.showConfirmDialog(rootPane, "Bạn chắc chắn muốn xóa?");
-            if (click == JOptionPane.YES_OPTION) {
-                try {
-                    monhocCtr.xoa(SaveMonHoc.maMH);
-                    JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
-                    loadData();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(QuanLyMonHoc.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(QuanLyMonHoc.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        if (maCH == 0) {
+            lb_thongbao.setText("Bạn cần chọn 1 câu hỏi để xóa");
+        }else{
+            try {
+                cauhoiCtr.xoa(maCH);
+                JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
+                loadData();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(QuanLyCauHoi.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(QuanLyCauHoi.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+        
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
@@ -377,7 +376,7 @@ public class QuanLyCauHoi extends javax.swing.JFrame {
         cauhoi.setDapanC(txt_luachonC.getText());
         cauhoi.setDapanD(txt_luachonD.getText());
         cauhoi.setDapandung(cb_dapandung.getSelectedItem().toString());
-        
+//        System.out.println(cauhoi);
     }//GEN-LAST:event_tbl_dataMouseReleased
 
     /**

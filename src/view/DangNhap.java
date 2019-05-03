@@ -15,6 +15,7 @@ import model.SinhVien;
 import view.giaovien.DangKyGiaoVien;
 import view.giaovien.MenuGV;
 import view.sinhvien.DangKySinhVien;
+import view.sinhvien.MenuSV;
 
 /**
  *
@@ -176,18 +177,21 @@ public class DangNhap extends javax.swing.JFrame {
             DangNhapController dangnhap = new DangNhapController();
             try {
                 int i = dangnhap.kiemtraDangNhap(tendangnhap, matkhau);
-                System.out.println(i);
+//                System.out.println(i);
                 if (i == 0) {
                     lb_thongbao.setText("Tên đăng nhập hoặc mật khẩu không đúng");
                 } else if(i == 1) {
                     //Hiển thị view dành cho giáo viên
                     JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
-                    MenuGV menu = new MenuGV();
-                    menu.setVisible(true);
+                    MenuGV menuGV = new MenuGV();
+                    menuGV.setVisible(true);
                     this.setVisible(false);
                 } else if(i == 2) {
                     //Hiển thị view cho sinh viên
-                    
+                    JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
+                    MenuSV menuSV = new MenuSV();
+                    menuSV.setVisible(true);
+                    this.setVisible(false);
                 }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);

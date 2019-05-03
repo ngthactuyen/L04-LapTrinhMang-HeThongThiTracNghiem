@@ -182,13 +182,19 @@ public class ChiTietDeThi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_themmoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themmoiActionPerformed
-        // TODO add your handling code here:
-        SaveMonHoc.maMH = dt.getMaMH();
-        SaveMonHoc.tenMH = lb_tenMH.getText();
-        SaveDeThi.maDT = dt.getMaDT();
-        ChonCauHoiChoDeThi chonCH = new ChonCauHoiChoDeThi();
-        chonCH.setVisible(true);
-        chonCH.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        try {
+            // TODO add your handling code here:
+            SaveMonHoc.maMH = dt.getMaMH();
+            SaveMonHoc.tenMH = lb_tenMH.getText();
+            SaveDeThi.maDT = dt.getMaDT();
+            ChonCauHoiChoDeThi chonCH = new ChonCauHoiChoDeThi();
+            chonCH.setVisible(true);
+            chonCH.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ChiTietDeThi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChiTietDeThi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_themmoiActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed

@@ -7,6 +7,7 @@ package controller;
 
 import connect.DBConnect;
 import entity.SaveGiaoVien;
+import entity.SaveSinhVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,6 +44,10 @@ public class DangNhapController {
         rs = pstmt.executeQuery();
         while (rs.next()) {            
             i = 2;
+            SaveSinhVien.maSV = rs.getString(1);
+            SaveSinhVien.tenSV = rs.getString(2);
+            SaveSinhVien.lop = rs.getString(3);
+            SaveSinhVien.matkhau = rs.getString(4);
         }
         
         return i;
